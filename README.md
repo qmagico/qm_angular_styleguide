@@ -9,6 +9,7 @@ Este documento contém um resumo das padronizações de estilo que devem ser seg
  1. [Quanto menos this melhor](#quanto-menos-this-melhor)
  1. [API primeiro](#api-primeiro)
 1. AngularJS
+ 1. [Regras de nomenclatura](#regras-de-nomenclatura)
  1. [Tudo é um componente](#tudo-é-um-componente)
  1. [Modelo como serviço](#modelo-como-serviço)
  1. [Modelos singleton vs. "classes"](#modelos-singleton-vs-classes)
@@ -157,6 +158,10 @@ function metodo2(indice){
 
 Uma vantagem "bônus" de fazer isso é que desse jeito, os métodos não são mais funções anônimas - o que facilita um pouco a hora que vc precisa debugar.
 
+## Regras de nomenclatura
+
+//TODO
+
 ## Tudo é um componente
 
 A aplicação deve ser uma composição de componentes (diretivas 'E'), que usam outros componentes e assim por diante.
@@ -265,7 +270,7 @@ Desse jeito a gente contorna o problema de ter um único modelo: o **serviço an
 
 Então, quando usar uma coisa e quando usar outra?
 
-Favoreça o POJO singleton, que é mais simples, a menos que:
+--> Favoreça o POJO singleton, que é mais simples, a menos que:
 
 * Vc precise de mais de uma instância do modelo; e/ou
 * Vc precisa fazer herança entre modelos
