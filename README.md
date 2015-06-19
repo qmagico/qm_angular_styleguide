@@ -3,7 +3,8 @@
 Este documento contém um resumo das padronizações de estilo que devem ser seguidas no código do QMágico.
 
 1. Javascript
-1.1. a
+  1. a
+  1. b
 1. Javascript
 
  * 1.1 O que é importante saber (de javascript)
