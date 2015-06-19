@@ -3,21 +3,24 @@
 Este documento contém um resumo das padronizações de estilo que devem ser seguidas no código do QMágico.
 
 1. Javascript
-  1. a
-  1. b
-1. Javascript
-
- * 1.1 O que é importante saber (de javascript)
- * 1.2 Favoreça "POJOs" (feijão com arroz)
- * 1.3 Classes e herança
- * 1.4 Quanto menos this melhor
- * 1.5 API primeiro
-* 2. AngularJS
- * 2.1 Tudo é um componente
- * 2.2 Modelo como serviço
- * 2.3 Modelos singleton vs. "classes"
+ 1. O que é importante saber (de javascript)
+ 1. Favoreça "POJOs" (feijão com arroz)
+ 1. Classes e herança
+ 1. Quanto menos this melhor
+ 1. API primeiro
+1. AngularJS
+ 1. Tudo é um componente
+ 1. Modelo como serviço
+ 1. Modelos singleton vs. "classes"
  
-## 1.1 O que é importante saber
+## O que é importante saber (de javascript)
+## Favoreça "POJOs" (feijão com arroz)
+## Classes e herança
+## Quanto menos this melhor
+## API primeiro
+## Tudo é um componente
+## Modelo como serviço
+## Modelos singleton vs. "classes"
 
 Javascript é uma linguagem que normalmente a gente "empurra com a barriga", e aprende o mínimo necessário pra conseguir os resultados desejados.
 Bom, aqui acabou essa história :-)
