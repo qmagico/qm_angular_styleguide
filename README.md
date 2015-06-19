@@ -100,7 +100,82 @@ Gato.prototype.barulho = function(){
 ```
 
 ## API primeiro
+
+Na nossa profissão, ler código é tão importante (talvez mais) quanto escrever.
+E a primeira pergunta que a gente tem na cabeça quanto tá olhando pra algum componente é "*O que que esse negócio faz?*"
+
+Bom, em se tratando de um objeto, responder essa pergunta é muito mais rápido se vc consegue ver, logo de cara, uma lista dos métodos que esse objeto tem.
+
+E a gente faz isso assim:
+
+* POJOs:
+
+```javascript
+var tarefas_manager = {
+    tarefas: [],
+};
+
+angular.extend(tarefas_manager, { // OBA! Olha a API do objeto todinha aí!
+    add_tarefa: add_tarefa,
+    remove_tarefa: remove_tarefa,
+});
+
+function add_tarefa(nova_tarefa){
+    tarefas_manager.tarefas.push(nova_tarefa);
+}
+
+function remove_tarefa(indice){
+    tarefas_manager.tarefas.splice(indice, 1);
+}
+```
+
+* "Classes":
+
+```javascript
+function MinhaClasseBemLegal(p1, p2, p3){
+    var mcbl = this;
+    mcbl.p1 = p1;
+    mcbl.p2 = p2;
+    mcbl.p3 = p3;
+}
+
+angular.extend(MinhaClasseBemLegal.prototype, { // OBA! Olha a API da "classe" todinha aí!
+    metodo1: metodo1,
+    metodo2: metodo2,
+});
+
+function metodo1(nova_tarefa){
+    var mcbl = this;
+    //faz as coisas do metodo 1
+}
+
+function metodo2(indice){
+    var mcbl = this;
+    //faz as coisas do metodo 2
+}
+```
+
+Uma vantagem "bônus" de fazer isso é que desse jeito, os métodos não são mais funções anônimas - o que facilita um pouco a hora que vc precisa debugar.
+
 ## Tudo é um componente
+
+A aplicação deve ser uma composição de componentes (diretivas 'E'), que usam outros componentes e assim por diante.
+Não deve haver páginas "soltas" com a lógica implementada dentro de um big controller. 
+Componentes assim são bons porque podem ser desenvolvidos e testados isoladamente (e o nosso DOCS [2] é o melhor lugar pra isso)
+
+[2] [Vídeo: Dicas Anguleiras do QMágico](https://www.youtube.com/watch?v=IEkBZYC_WWc)
+
 ## Modelo como serviço
+
+Tanto quanto possível, controllers não devem armazenar o estado da tela no `$scope`.
+Ao invés disso, as telas devem ter um **modelo**.
+
+Um modelo de uma tela é um objeto javascript que armazena o estado da tela, e contém métodos que fazem algum tipo de transformação nesse estado.
+A implementação dos modelos de telas devem estar dentro de serviços angular, criados com `angular.factory()`.
+Os templates simplesmente fazem binding com as coisas do modelo, com coisas do tipo `ng-model="m.nome"` ou `ng-click="m.add_tarefa()"`.
+Esse é o pattern que a gente chama de *modelo como serviço* e está melhor explicado aqui [3].
+
+[3] [Vídeo: Como fazer TDD com AngularJS](https://www.youtube.com/watch?v=95KBRKdOt0c)
+
 ## Modelos singleton vs. "classes"
 
