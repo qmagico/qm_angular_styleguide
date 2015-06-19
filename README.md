@@ -171,11 +171,101 @@ Tanto quanto possível, controllers não devem armazenar o estado da tela no `$s
 Ao invés disso, as telas devem ter um **modelo**.
 
 Um modelo de uma tela é um objeto javascript que armazena o estado da tela, e contém métodos que fazem algum tipo de transformação nesse estado.
-A implementação dos modelos de telas devem estar dentro de serviços angular, criados com `angular.factory()`.
+
+A implementação dos modelos de telas devem estar dentro de serviços angular, criados com `angular.module('my_module').factory()`.
+
 Os templates simplesmente fazem binding com as coisas do modelo, com coisas do tipo `ng-model="m.nome"` ou `ng-click="m.add_tarefa()"`.
+
 Esse é o pattern que a gente chama de *modelo como serviço* e está melhor explicado aqui [3].
 
 [3] [Vídeo: Como fazer TDD com AngularJS](https://www.youtube.com/watch?v=95KBRKdOt0c)
 
 ## Modelos singleton vs. "classes"
 
+Na maioria dos casos, uma implementação de modelo que retorna um POJO (como essa abaixo), resolve o problema:
+
+```javascript
+angular.module('my_module').factory('TarefasModel', function(){
+    var m = {
+        tarefas: [],
+    };
+
+    angular.extend(m, {
+        add_tarefa: add_tarefa,
+        remove_tarefa: remove_tarefa,
+    });
+
+    function add_tarefa(nova_tarefa){
+        m.tarefas.push(nova_tarefa);
+    }
+
+    function remove_tarefa(indice){
+        m.tarefas.splice(indice, 1);
+    }
+
+    return m;
+});
+
+angular.module('my_module').directive('tarefas', function(){
+    return {
+        restrict: 'E',
+        scope: {},
+        templateURL: '/caminho/do/template/tarefas.html',
+        controller: function($scope, TarefasModel){
+            var m = $scope.m = TarefasModel;
+        }
+    };
+});
+```
+
+Mas, isso não vai funcionar se eu precisar colocar duas diretivas `<tarefas></tarefas>` mostrando listas de tarefas diferentes.
+Não funciona porque, como serviços são singleton, as duas diretivas têm o mesmo modelo, e por isso sempre compartilhariam o mesmo estado.
+
+A maneira de resolver esse problema, é alterar o serviço pra que ele retorne uma "classe" ao invés de um objeto POJO:
+
+```javascript
+angular.module('my_module').factory('TarefasModel', function(){
+
+    function TarefasModel(){
+        var m = this;
+        m.tarefas = [];
+    }
+
+    angular.extend(TarefasModel.prototype, {
+        add_tarefa: add_tarefa,
+        remove_tarefa: remove_tarefa,
+    });
+
+    function add_tarefa(nova_tarefa){
+        var m = this;
+        m.tarefas.push(nova_tarefa);
+    }
+
+    function remove_tarefa(indice){
+        var m = this;
+        m.tarefas.splice(indice, 1);
+    }
+
+    return TarefasModel;
+});
+
+angular.module('my_module').directive('tarefas', function(){
+    return {
+        restrict: 'E',
+        scope: {},
+        templateURL: '/caminho/do/template/tarefas.html',
+        controller: function($scope, TarefasModel){
+            var m = $scope.m = new TarefasModel();
+        }
+    };
+});
+```
+
+Desse jeito a gente contorna o problema de ter um único modelo: o **serviço angular** continua sendo singleton (só existe uma function `TarefasModel`), mas cada diretiva instancia seu prório modelo.
+
+Então, quando usar uma coisa e quando usar outra?
+
+Favoreça o POJO singleton, que é mais simples, a menos que:
+
+* Vc precise de mais de uma instância do modelo; e/ou
+* Vc precisa fazer herança entre modelos
