@@ -49,7 +49,6 @@ var tarefas_manager = {
 Quando vc tem um tipo de objeto que vai ser instanciado mais de uma vez na aplicação, e/ou quando vc precisa fazer herança, faz sentido usar o recurso de "classes" do javascript.
 
 ```javascript
-
 // definição da "classe"
 function Animal(nome){
     this.nome = nome;
@@ -64,6 +63,30 @@ var a2 = new Animal('garfield');
 a1.barulho();
 a2.barulho();
 ```
+
+E se precisar fazer herança, é assim:
+
+```javascript
+// definição da "classe"
+function Gato(nome){
+    Animal.call(this, nome); // se precisar chamar o construtor do pai é assim que faz
+}
+jsutils.class_extend(Animal, Gato); // ver [1]
+
+Gato.prototype.barulho = function(){
+    console.log('Gato '+this.name+': MIAAAAAU');
+}
+
+// criando instâncias e chamando métodos:
+var g1 = new Animal('felix');
+var g2 = new Animal('garfield');
+g1.barulho();
+g2.barulho();
+```
+
+[1] [Herança em javascript](http://stackoverflow.com/questions/4152931/javascript-inheritance-call-super-constructor-or-use-prototype-chain)
+
+
 
 
 ## Quanto menos this melhor
