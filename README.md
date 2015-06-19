@@ -3,15 +3,15 @@
 Este documento contém um resumo das padronizações de estilo que devem ser seguidas no código do QMágico.
 
 1. Javascript
- 1. [O que é importante saber (de javascript)](o-que-é-importante-saber-de-javascript)
- 1. [Favoreça "POJOs" (feijão com arroz)](favoreça-pojos-feijão-com-arroz)
- 1. [Classes e herança](classes-e-herança)
- 1. [Quanto menos this melhor](quanto-menos-this-melhor)
- 1. [API primeiro](api-primeiro)
+ 1. [O que é importante saber (de javascript)](#o-que-é-importante-saber-de-javascript)
+ 1. [Favoreça "POJOs" (feijão com arroz)](#favoreça-pojos-feijão-com-arroz)
+ 1. [Classes e herança](#classes-e-herança)
+ 1. [Quanto menos this melhor](#quanto-menos-this-melhor)
+ 1. [API primeiro](#api-primeiro)
 1. AngularJS
- 1. [Tudo é um componente](tudo-é-um-componente)
- 1. [Modelo como serviço](modelo-como-serviço)
- 1. [Modelos singleton vs. "classes"](modelos-singleton-vs-classes)
+ 1. [Tudo é um componente](#tudo-é-um-componente)
+ 1. [Modelo como serviço](#modelo-como-serviço)
+ 1. [Modelos singleton vs. "classes"](#modelos-singleton-vs-classes)
  
 ## O que é importante saber (de javascript)
 ## Favoreça "POJOs" (feijão com arroz)
