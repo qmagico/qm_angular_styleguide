@@ -2,7 +2,9 @@
 
 Este documento contém um resumo das padronizações de estilo que devem ser seguidas no código do QMágico.
 
-* 1. Javascript
+1. Javascript
+1. Javascript
+
  * 1.1 O que é importante saber (de javascript)
  * 1.2 Favoreça "POJOs" (feijão com arroz)
  * 1.3 Classes e herança
