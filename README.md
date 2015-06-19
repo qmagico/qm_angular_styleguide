@@ -86,10 +86,19 @@ g2.barulho();
 
 [1] [Herança em javascript](http://stackoverflow.com/questions/4152931/javascript-inheritance-call-super-constructor-or-use-prototype-chain)
 
-
-
-
 ## Quanto menos this melhor
+
+Ao usar "classes" como acima, inevitavelmente precisamos lidar com o **this**, que é um carinha pra lá de problemático em JS.
+Por isso, padronizamos que, pra minimizar o uso de this, e com isso a quantidade de bugs que podem acontecer porque o this não é quem a gente pensa, todo método de "classe" deve ter como primeira instrução uma atribuição de this a uma variável alternativa:
+
+```javascript
+Gato.prototype.barulho = function(){
+    var g = this;
+    console.log('Gato '+g.name+': MIAAAAAU');
+    // possivelmente usa "g" mais vezes aqui.
+}
+```
+
 ## API primeiro
 ## Tudo é um componente
 ## Modelo como serviço
