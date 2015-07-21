@@ -7,6 +7,7 @@ Este documento contém um resumo das padronizações de estilo que devem ser seg
  1. [Favoreça "POJOs" (feijão com arroz)](#favoreça-pojos-feijão-com-arroz)
  1. [Classes e herança](#classes-e-herança)
  1. [Quanto menos this melhor](#quanto-menos-this-melhor)
+ 1. [Jogue Errors, não Strings](#jogue-errors-não-strings)
  1. [API primeiro](#api-primeiro)
 1. AngularJS
  1. [Regras de nomenclatura](#regras-de-nomenclatura)
@@ -98,6 +99,18 @@ Gato.prototype.barulho = function(){
     console.log('Gato '+g.name+': MIAAAAAU');
     // possivelmente usa "g" mais vezes aqui.
 }
+```
+
+## Jogue Errors, não Strings
+
+Ao lançar (throw) exceções em javascript, evite jogar strings ou objetos não tipados. Jogue sempre uma instância de Error.
+Errors têm **stack**, e stacks são do bem.
+
+```javascript
+throw 'Deu pau';            // ruim
+throw {message: 'Deu pau'}; // ruim
+
+throw new Error('Deu pau'); // BOM
 ```
 
 ## API primeiro
